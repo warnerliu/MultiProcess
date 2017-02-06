@@ -1,8 +1,12 @@
 package com.tencent.multiprocess;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,18 +19,55 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	TextView startTextView;
 	@Bind(R.id.stopTextView)
 	TextView stopTextView;
+	@Bind(R.id.bindTextView)
+	TextView bindTextView;
+	@Bind(R.id.unbindTextView)
+	TextView unbindTextView;
+
+	private ServiceConnection serviceConnection;
+	private IMyAidlInterface iMyAidlInterface;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.i(getClass().toString(), "thread id === " + Thread.currentThread().getId());
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
 		initClickListener();
+		initServiceConnection();
 	}
 
 	private void initClickListener() {
 		startTextView.setOnClickListener(this);
 		stopTextView.setOnClickListener(this);
+		bindTextView.setOnClickListener(this);
+		unbindTextView.setOnClickListener(this);
+	}
+
+	private void initServiceConnection() {
+
+		serviceConnection = new ServiceConnection() {
+			@Override
+			public void onServiceConnected(ComponentName name, IBinder service) {
+
+				iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);
+				Log.i(getClass().toString(), "onServiceConnected === " + service.toString());
+				try {
+					iMyAidlInterface.plus(10, 18);
+					Person person = new Person();
+					person.setName("warner");
+					person.setSex("male");
+					iMyAidlInterface.printPerson(person);
+				} catch (Exception e) {
+
+				}
+			}
+
+			@Override
+			public void onServiceDisconnected(ComponentName name) {
+				Log.i(getClass().toString(), "onServiceDisconnected");
+			}
+		};
 	}
 
 	@Override
@@ -39,6 +80,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			case R.id.stopTextView:
 				Intent stopIntent = new Intent(this, ServiceProcess.class);
 				stopService(stopIntent);
+				break;
+			case R.id.bindTextView:
+				Intent bindIntent = new Intent(this, ServiceProcess.class);
+				bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
+				break;
+			case R.id.unbindTextView:
+				unbindService(serviceConnection);
 				break;
 			default:
 				break;

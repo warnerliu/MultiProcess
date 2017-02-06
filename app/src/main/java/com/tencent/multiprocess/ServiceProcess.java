@@ -3,23 +3,33 @@ package com.tencent.multiprocess;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 /**
  * Created by warner on 04/02/2017.
+ * service运行在主线程，跟thread没有任何关系，不要将后台运行和子线程的概念混淆到一起
  */
 
 public class ServiceProcess extends Service {
+	private MyBinder myBinder;
+
 	@Nullable
 	@Override
 	public IBinder onBind(Intent intent) {
-		return null;
+		return myBinder;
 	}
 
+	/**
+	 * onCreate方法只会执行一次
+	 */
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		myBinder = new MyBinder();
+		Log.i(getClass().toString(), "binder id === " + myBinder.toString());
+		Log.i(getClass().toString(), "thread id === " + Thread.currentThread().getId());
 		Log.i(getClass().toString(), "onCreate method");
 	}
 
@@ -29,9 +39,32 @@ public class ServiceProcess extends Service {
 		return super.onStartCommand(intent, flags, startId);
 	}
 
+	/**
+	 * service只有在stop状态，并且没有和任何activity关联的情况下才会被销毁
+	 */
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		Log.i(getClass().toString(), "onDestroy method");
+	}
+
+	class MyBinder extends IMyAidlInterface.Stub {
+
+		@Override
+		public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+
+		}
+
+		@Override
+		public void plus(int a, int b) throws RemoteException {
+
+			Log.i(getClass().toString(), "base type === " + (a + b));
+		}
+
+		@Override
+		public void printPerson(Person person) throws RemoteException {
+
+			Log.i(getClass().toString(), "this is person info from another process === " + person.getName() + " & " + person.getSex());
+		}
 	}
 }
