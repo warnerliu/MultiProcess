@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -46,6 +47,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	private void initServiceConnection() {
 
+		final IMyAidlCallback callback = new IMyAidlCallback.Stub() {
+			@Override
+			public void getPerson(Person p) throws RemoteException {
+				Log.i(getClass().toString(), "callback value === " + p.getName() + " === " + p.getSex());
+			}
+		};
 		serviceConnection = new ServiceConnection() {
 			@Override
 			public void onServiceConnected(ComponentName name, IBinder service) {
@@ -58,6 +65,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					person.setName("warner");
 					person.setSex("male");
 					iMyAidlInterface.printPerson(person);
+					iMyAidlInterface.setCallback(callback);
 				} catch (Exception e) {
 
 				}

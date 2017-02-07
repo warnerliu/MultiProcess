@@ -50,6 +50,9 @@ public class ServiceProcess extends Service {
 
 	class MyBinder extends IMyAidlInterface.Stub {
 
+		private IMyAidlCallback callback;
+		private Person person;
+
 		@Override
 		public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
 
@@ -65,6 +68,13 @@ public class ServiceProcess extends Service {
 		public void printPerson(Person person) throws RemoteException {
 
 			Log.i(getClass().toString(), "this is person info from another process === " + person.getName() + " & " + person.getSex());
+			this.person = person;
+		}
+
+		@Override
+		public void setCallback(IMyAidlCallback callback) throws RemoteException {
+			this.callback = callback;
+			this.callback.getPerson(person);
 		}
 	}
 }
