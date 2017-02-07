@@ -1,4 +1,4 @@
-package com.tencent.multiprocess;
+package com.tencent.multiprocess.aidlexample;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tencent.multiprocess.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class AidlExampleActivity extends Activity implements View.OnClickListener {
 
 	@Bind(R.id.startTextView)
 	TextView startTextView;
@@ -32,7 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.i(getClass().toString(), "thread id === " + Thread.currentThread().getId());
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_base_aidl);
 		ButterKnife.bind(this);
 		initClickListener();
 		initServiceConnection();

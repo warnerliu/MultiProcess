@@ -1,5 +1,5 @@
 // Person.aidl
-package com.tencent.multiprocess;
+package com.tencent.multiprocess.aidlexample;
 
 // Declare any non-default types here with import statements
 parcelable Person;

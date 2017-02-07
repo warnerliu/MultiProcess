@@ -1,4 +1,4 @@
-package com.tencent.multiprocess;
+package com.tencent.multiprocess.aidlexample;
 
 import android.app.Service;
 import android.content.Intent;

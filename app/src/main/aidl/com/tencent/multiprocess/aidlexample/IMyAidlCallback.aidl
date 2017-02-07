@@ -1,6 +1,6 @@
 // IMyAidlCallback.aidl
-package com.tencent.multiprocess;
-import com.tencent.multiprocess.Person;
+package com.tencent.multiprocess.aidlexample;
+import com.tencent.multiprocess.aidlexample.Person;
 
 // Declare any non-default types here with import statements
 

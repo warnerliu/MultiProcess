@@ -9,17 +9,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".aidlexample.AidlExampleActivity">
+
+        </activity>
         <!--android:process可以控制组件在哪个进程运行，如果应用想运行在多个进程，可以设置此属性-->
         <service
-            android:name=".ServiceProcess"
+            android:name=".aidlexample.ServiceProcess"
             android:process=":remote"/>
+        <activity android:name=".tag.AidlTagActivity"/>
+        <service
+            android:name=".tag.AidlTagService"
+            android:process=":tagService"/>
     </application>
 
 </manifest>
