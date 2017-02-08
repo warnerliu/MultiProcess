@@ -33,8 +33,8 @@ public class AidlExampleActivity extends Activity implements View.OnClickListene
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i(getClass().toString(), "thread id === " + Thread.currentThread().getId());
 		setContentView(R.layout.activity_base_aidl);
+		Log.i(getClass().toString(), "thread id === " + Thread.currentThread().getId());
 		ButterKnife.bind(this);
 		initClickListener();
 		initServiceConnection();

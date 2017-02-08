@@ -52,7 +52,7 @@ public class BookInfo implements Parcelable {
 	}
 
 	/**
-	 * 如果要使用定向tag中的out，必须要有readFromParcel方法
+	 * 如果要使用定向tag中的out，必须要有readFromParcel方法，否则在使用BookInfo类的地方会报错
 	 */
 	public void readFromParcel(Parcel in) {
 		this.name = in.readString();

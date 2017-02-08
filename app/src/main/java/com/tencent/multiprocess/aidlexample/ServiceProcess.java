@@ -10,6 +10,7 @@ import android.util.Log;
 /**
  * Created by warner on 04/02/2017.
  * service运行在主线程，跟thread没有任何关系，不要将后台运行和子线程的概念混淆到一起
+ * activity在destroy后，还可以通过bind方法将activity与Service之间建立联系，但线程做不到这一点
  */
 
 public class ServiceProcess extends Service {
@@ -28,7 +29,6 @@ public class ServiceProcess extends Service {
 	public void onCreate() {
 		super.onCreate();
 		myBinder = new MyBinder();
-		Log.i(getClass().toString(), "binder id === " + myBinder.toString());
 		Log.i(getClass().toString(), "thread id === " + Thread.currentThread().getId());
 		Log.i(getClass().toString(), "onCreate method");
 	}
@@ -41,6 +41,7 @@ public class ServiceProcess extends Service {
 
 	/**
 	 * service只有在stop状态，并且没有和任何activity关联的情况下才会被销毁
+	 * 如果执行了bind操作，需要unbind操作后才能停止service
 	 */
 	@Override
 	public void onDestroy() {
