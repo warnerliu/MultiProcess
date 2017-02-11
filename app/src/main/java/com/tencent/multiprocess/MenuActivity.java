@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.tencent.multiprocess.aidlexample.AidlExampleActivity;
 import com.tencent.multiprocess.tag.AidlTagActivity;
+import com.tencent.multiprocess.tag.RemoteProcessActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,6 +22,8 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 	TextView serviceTextView;
 	@Bind(R.id.aidlTagTextView)
 	TextView aidlTagTextView;
+	@Bind(R.id.remoteTextView)
+	TextView remoteTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 	private void setClickEvent() {
 		serviceTextView.setOnClickListener(this);
 		aidlTagTextView.setOnClickListener(this);
+		remoteTextView.setOnClickListener(this);
 	}
 
 	@Override
@@ -45,6 +49,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 			case R.id.aidlTagTextView:
 				Intent tagIntent = new Intent(this, AidlTagActivity.class);
 				startActivity(tagIntent);
+				break;
+			case R.id.remoteTextView:
+				Intent remoteIntent = new Intent(this, RemoteProcessActivity.class);
+				startActivity(remoteIntent);
 				break;
 			default:
 				break;

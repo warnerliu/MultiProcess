@@ -48,5 +48,14 @@ public class AidlTagService extends Service {
 			book.setName("SERVICE AIDL INOUT");
 			return book;
 		}
+
+		@Override
+		public BookInfo getBookInfo() throws RemoteException {
+
+			BookInfo bookInfo = new BookInfo();
+			bookInfo.setName("remote client");
+			bookInfo.setPrice(66);
+			return bookInfo;
+		}
 	}
 }

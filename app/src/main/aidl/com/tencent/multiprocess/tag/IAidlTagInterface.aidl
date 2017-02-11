@@ -12,4 +12,5 @@ interface IAidlTagInterface {
     BookInfo addBookIn(in BookInfo book);
     BookInfo addBookOut(out BookInfo book);
     BookInfo addBookInOut(inout BookInfo book);
+    BookInfo getBookInfo();
 }

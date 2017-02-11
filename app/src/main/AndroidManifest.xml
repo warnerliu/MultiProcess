@@ -23,6 +23,7 @@
             android:name=".aidlexample.ServiceProcess"
             android:process=":remote"/>
         <activity android:name=".tag.AidlTagActivity"/>
+        <activity android:name=".tag.RemoteProcessActivity"/>
         <service
             android:name=".tag.AidlTagService"
             android:process=":tagService"/>
