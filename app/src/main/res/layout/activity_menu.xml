@@ -42,4 +42,13 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:text="remote process"/>
+
+    <TextView
+        android:text="HandlerLooper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/remoteTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:id="@+id/activity_handler_looper"/>
 </RelativeLayout>

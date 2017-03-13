@@ -12,21 +12,26 @@
         <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".aidlexample.AidlExampleActivity">
-
         </activity>
-        <!--android:process可以控制组件在哪个进程运行，如果应用想运行在多个进程，可以设置此属性-->
+        <!-- android:process可以控制组件在哪个进程运行，如果应用想运行在多个进程，可以设置此属性 -->
         <service
             android:name=".aidlexample.ServiceProcess"
             android:process=":remote"/>
+
         <activity android:name=".tag.AidlTagActivity"/>
         <activity android:name=".tag.RemoteProcessActivity"/>
+
         <service
             android:name=".tag.AidlTagService"
             android:process=":tagService"/>
+
+        <activity android:name=".mylooper.HandlerLooperActivity">
+        </activity>
     </application>
 
 </manifest>

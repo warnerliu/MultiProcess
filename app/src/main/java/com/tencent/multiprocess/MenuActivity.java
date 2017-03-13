@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.tencent.multiprocess.aidlexample.AidlExampleActivity;
+import com.tencent.multiprocess.mylooper.HandlerLooperActivity;
 import com.tencent.multiprocess.tag.AidlTagActivity;
 import com.tencent.multiprocess.tag.RemoteProcessActivity;
 
@@ -24,6 +25,8 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 	TextView aidlTagTextView;
 	@Bind(R.id.remoteTextView)
 	TextView remoteTextView;
+	@Bind(R.id.activity_handler_looper)
+	TextView activityHandlerLooper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 		serviceTextView.setOnClickListener(this);
 		aidlTagTextView.setOnClickListener(this);
 		remoteTextView.setOnClickListener(this);
+		activityHandlerLooper.setOnClickListener(this);
 	}
 
 	@Override
@@ -53,6 +57,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 			case R.id.remoteTextView:
 				Intent remoteIntent = new Intent(this, RemoteProcessActivity.class);
 				startActivity(remoteIntent);
+				break;
+			case R.id.activity_handler_looper:
+				Intent looperIntent = new Intent(this, HandlerLooperActivity.class);
+				startActivity(looperIntent);
 				break;
 			default:
 				break;
